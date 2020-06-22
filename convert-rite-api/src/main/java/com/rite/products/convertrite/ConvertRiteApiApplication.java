@@ -9,5 +9,4 @@ public class ConvertRiteApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ConvertRiteApiApplication.class, args);
 	}
-
 }
