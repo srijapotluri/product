@@ -12,6 +12,9 @@ public class CloudTableId implements Serializable{
 	//private int applicationId;
 	
 	private long tableId;
+	
+	@Column(name = "TABLE_NAME")
+	private String tableName;
 
 	/*
 	 * public int getApplicationId() { return applicationId; } public void
@@ -24,5 +27,12 @@ public class CloudTableId implements Serializable{
 		this.tableId = tableId;
 	}
     
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
 
 }

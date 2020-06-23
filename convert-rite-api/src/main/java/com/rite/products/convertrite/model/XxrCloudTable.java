@@ -12,8 +12,7 @@ import javax.persistence.Table;
 public class XxrCloudTable implements Serializable {
 	@EmbeddedId
 	private CloudTableId cloudTableId;
-	@Column(name = "TABLE_NAME")
-	private String tableName;
+	
 	@Column(name = "USER_TABLE_NAME")
 	private String userTableName;
 	
@@ -46,14 +45,6 @@ public class XxrCloudTable implements Serializable {
 
 	public void setCloudTableId(CloudTableId cloudTableId) {
 		this.cloudTableId = cloudTableId;
-	}
-
-	public String getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
 	}
 
 	public String getUserTableName() {

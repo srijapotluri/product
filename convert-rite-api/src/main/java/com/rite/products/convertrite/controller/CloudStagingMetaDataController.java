@@ -1,5 +1,6 @@
 package com.rite.products.convertrite.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -24,7 +25,12 @@ public class CloudStagingMetaDataController {
 	@GetMapping("/loadxxrclouddata")
 	public ResponseEntity<List<XxrCloudTable>> getAllCloudData() {
 		log.info("Start of getAllCloudData in CloudStagingMetaDataController :::");
-		List<XxrCloudTable> list = xxrCloudService.getAllCloudData();
+		List<XxrCloudTable> list=new ArrayList<>();
+		try {
+			list = xxrCloudService.getAllCloudData();	
+		}catch(Exception e) {
+			log.error(e.getMessage());
+		}	
 		return new ResponseEntity<List<XxrCloudTable>>(list, new HttpHeaders(), HttpStatus.OK);
 	}
 
