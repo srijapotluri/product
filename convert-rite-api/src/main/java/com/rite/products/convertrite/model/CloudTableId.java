@@ -11,6 +11,8 @@ public class CloudTableId implements Serializable{
 	
 	//private int applicationId;
 	
+	private static final long serialVersionUID = 1L;
+
 	private long tableId;
 	
 	@Column(name = "TABLE_NAME")

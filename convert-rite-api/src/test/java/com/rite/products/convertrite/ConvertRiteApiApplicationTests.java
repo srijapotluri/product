@@ -1,5 +1,6 @@
 package com.rite.products.convertrite;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.rite.products.convertrite.controller.CloudStagingMetaDataController;
 import com.rite.products.convertrite.model.CloudTableId;
 import com.rite.products.convertrite.model.XxrCloudTable;
 import com.rite.products.convertrite.respository.XxrCloudTableRepository;
@@ -51,10 +51,14 @@ public class ConvertRiteApiApplicationTests {
 		list.add(obj1);
 
 		when(xxrCloudTableRepository.findAll()).thenReturn(list);
+		try {
+		//List<XxrCloudTable> listCloudTable = xxrColudServiceImpl.getAllCloudData();
+		}
+		catch(Exception e) {
+			 assertThat(e.getMessage().equals("Name must not be null"));
+		}
 		
-		List<XxrCloudTable> listCloudTable = xxrColudServiceImpl.getAllCloudData();
 		
-		//when(listCloudTable==null).thenThrow(new Exception());
 
 	}
 }
