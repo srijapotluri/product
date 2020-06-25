@@ -13,5 +13,10 @@ public interface SourceTemplateHeadersRepository extends JpaRepository<SourceTem
 	@Query("SELECT h.templateId from SourceTemplateHeaders h"
 			+ " where h.templateName =:templateName")
 	public Long getTemplateId(@Param("templateName") String templateName);
+	
+	@Query ("SELECT h.templateName from SourceTemplateHeaders h where h.saasobjectCode IN :objectCode"
+			+ " and h.saasParentObjectCode IN :objectCode")
+	public String [] getTemplateHeaders(@Param("objectCode") String[] objectCode);
+	
 
 }

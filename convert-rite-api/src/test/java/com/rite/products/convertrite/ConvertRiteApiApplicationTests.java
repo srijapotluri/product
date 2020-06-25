@@ -44,8 +44,8 @@ public class ConvertRiteApiApplicationTests {
 		cloudTableId.setTableId(5233);
 		cloudTableId.setTableName("POZ_SUPPLIERS_INT");
 		obj1.setCloudTableId(cloudTableId);
-		obj1.setObjectCode("SUPPLIER");
-		obj1.setParentObjectCode("SUPPLIER");
+		//obj1.setObjectCode("SUPPLIER");
+		//obj1.setParentObjectCode("SUPPLIER");
 		obj1.setUserTableName("POZ_SUPPLIERS_INT");
 
 		list.add(obj1);

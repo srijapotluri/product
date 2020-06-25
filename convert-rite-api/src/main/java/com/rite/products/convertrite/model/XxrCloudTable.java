@@ -22,11 +22,11 @@ public class XxrCloudTable implements Serializable {
 	@Column(name = "USER_TABLE_NAME")
 	private String userTableName;
 	
-	@Column(name = "OBJECT_NAME")
-	private String objectCode;
-	
-	@Column(name = "PARENT_OBJECT")
-	private String parentObjectCode;
+	/*
+	 * @Column(name = "OBJECT_NAME") private String objectCode;
+	 * 
+	 * @Column(name = "PARENT_OBJECT") private String parentObjectCode;
+	 */
 	
 	
 	/*
@@ -41,22 +41,17 @@ public class XxrCloudTable implements Serializable {
 	 * }
 	 */
 
-	public String getObjectCode() {
-		return objectCode;
-	}
-
-	public void setObjectCode(String objectCode) {
-		this.objectCode = objectCode;
-	}
-
-	public String getParentObjectCode() {
-		return parentObjectCode;
-	}
-
-	public void setParentObjectCode(String parentObjectCode) {
-		this.parentObjectCode = parentObjectCode;
-	}
-
+	/*
+	 * public String getObjectCode() { return objectCode; }
+	 * 
+	 * public void setObjectCode(String objectCode) { this.objectCode = objectCode;
+	 * }
+	 * 
+	 * public String getParentObjectCode() { return parentObjectCode; }
+	 * 
+	 * public void setParentObjectCode(String parentObjectCode) {
+	 * this.parentObjectCode = parentObjectCode; }
+	 */
 	public CloudTableId getCloudTableId() {
 		return cloudTableId;
 	}

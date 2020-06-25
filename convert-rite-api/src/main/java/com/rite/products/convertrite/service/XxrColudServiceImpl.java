@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rite.products.convertrite.model.CloudMetaData;
 import com.rite.products.convertrite.model.XxrCloudTable;
 import com.rite.products.convertrite.po.CloudSourceColumnsPo;
 import com.rite.products.convertrite.po.XxrCloudTemplatePo;
+import com.rite.products.convertrite.respository.CloudMetaDataRepository;
 import com.rite.products.convertrite.respository.SourceTemplateColumnsRepository;
 import com.rite.products.convertrite.respository.SourceTemplateHeadersRepository;
 import com.rite.products.convertrite.respository.XxrCloudColumnsRepository;
@@ -29,6 +31,8 @@ public class XxrColudServiceImpl implements XxrCloudService {
 	XxrCloudColumnsRepository xxrCloudColumnsRepository;
 	@Autowired
 	SourceTemplateColumnsRepository sourceTemplateColumnsRepository;
+	@Autowired
+	CloudMetaDataRepository cloudMetaDataRepository;
 
 	public XxrCloudTemplatePo getAllCloudData() {
 		log.info("Start of getAllCloudData in Service Layer ###");
@@ -37,9 +41,17 @@ public class XxrColudServiceImpl implements XxrCloudService {
 		XxrCloudTemplatePo cloudTemplatePo = new XxrCloudTemplatePo();
 		try {
 			cloudDataList = xxrCloudTableRepository.findAll();
-			templateHeaders = xxrCloudTableRepository.getSourceTemplateHeaders();
-
+			// templateHeaders = xxrCloudTableRepository.getSourceTemplateHeaders();
+			String[] objectNames = cloudMetaDataRepository.getValues("OBJECT_NAME");
+			String[] pod = cloudMetaDataRepository.getValues("POD");
+			String[] bu = cloudMetaDataRepository.getValues("BU");
+			templateHeaders = sourceTemplateHeadersRepository.getTemplateHeaders(objectNames);
+			
 			cloudTemplatePo.setCloudTableMetaData(cloudDataList);
+			cloudTemplatePo.setBu(bu);
+			cloudTemplatePo.setPod(pod);
+			cloudTemplatePo.setObjectCodes(objectNames);
+			cloudTemplatePo.setParentObjectCode(objectNames);
 			cloudTemplatePo.setTemplateHeaders(templateHeaders);
 
 		} catch (Exception e) {
@@ -55,7 +67,7 @@ public class XxrColudServiceImpl implements XxrCloudService {
 		try {
 			long tableId = xxrCloudTableRepository.getTableId(cloudTableName);
 			long templateId = sourceTemplateHeadersRepository.getTemplateId(sourceTemplateName);
-			log.info("tableId::::::" + tableId + "templateId::::" + templateId);
+			log.info("tableId:::::: " + tableId + "templateId:::: " + templateId);
 
 			String[] cloudColumns = xxrCloudColumnsRepository.getColumnName(tableId);
 			String[] sourceColumns = sourceTemplateColumnsRepository.getColumnNames(templateId);

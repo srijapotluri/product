@@ -34,21 +34,22 @@ public class CloudStagingMetaDataController {
 	}
 
 	@GetMapping("/getcloudsourcecolumns")
-	public CloudSourceColumnsPo getCloudSourceColumns(@RequestParam("sourceTemplateName") String sourceTemplateName,
+	public ResponseEntity<CloudSourceColumnsPo> getCloudSourceColumns(@RequestParam("sourceTemplateName") String sourceTemplateName,
 			@RequestParam("cloudTableName") String cloudTableName) {
 
 		log.info("Entering getCloudSourceColumns Method in Controller ###");
-		log.info("sourceTemplateName" + sourceTemplateName + "CloudTableName" + cloudTableName);
+		log.info("sourceTemplateName:::::::" + sourceTemplateName + "CloudTableName:::::::" + cloudTableName);
 		CloudSourceColumnsPo cloudSourceColumnsPo = new CloudSourceColumnsPo();
 		try {
 			if(sourceTemplateName!=null&&cloudTableName!=null)
 			cloudSourceColumnsPo = xxrCloudService.getCloudSourceColumns(sourceTemplateName, cloudTableName);
 			else
+				//return new ResponseEntity("Please send SourceTemplateName and CloudTableName in the URL",HttpStatus.BAD_REQUEST);
 			log.error("Please send SourceTemplateName and CloudTableName in the URL");
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
-		return cloudSourceColumnsPo;
+		return new ResponseEntity<CloudSourceColumnsPo>(cloudSourceColumnsPo, new HttpHeaders(), HttpStatus.OK);
 
 	}
 
