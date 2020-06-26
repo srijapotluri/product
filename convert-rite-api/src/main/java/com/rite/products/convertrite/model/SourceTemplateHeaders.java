@@ -15,7 +15,7 @@ public class SourceTemplateHeaders {
 	private String templateName;
 	
 	@Column(name="SAAS_OBJECT_CODE")
-	private String objectCode;
+	private String saasobjectCode;
 	
 	@Column(name="SAAS_PARENT_OBJECT_CODE")
 	private String saasParentObjectCode;
@@ -36,12 +36,13 @@ public class SourceTemplateHeaders {
 		this.templateName = templateName;
 	}
 
-	public String getObjectCode() {
-		return objectCode;
+	
+	public String getSaasobjectCode() {
+		return saasobjectCode;
 	}
 
-	public void setObjectCode(String objectCode) {
-		this.objectCode = objectCode;
+	public void setSaasobjectCode(String saasobjectCode) {
+		this.saasobjectCode = saasobjectCode;
 	}
 
 	public String getSaasParentObjectCode() {

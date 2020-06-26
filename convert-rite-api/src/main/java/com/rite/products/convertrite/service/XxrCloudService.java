@@ -1,11 +1,13 @@
 package com.rite.products.convertrite.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
-import com.rite.products.convertrite.model.XxrCloudTable;
+import com.rite.products.convertrite.po.CloudSourceColumnsPo;
+import com.rite.products.convertrite.po.XxrCloudTemplatePo;
+
 @Service
 public interface XxrCloudService {
-	List<XxrCloudTable> getAllCloudData();
+	XxrCloudTemplatePo getAllCloudData();
+
+	CloudSourceColumnsPo getCloudSourceColumns(String sourceTemplateName, String cloudTableName);
 }
