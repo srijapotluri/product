@@ -60,7 +60,7 @@ public class CloudStagingMetaDataController {
 
 	}
 	
-	@PostMapping("getcloudtemplate")
+	@PostMapping("/getcloudtemplate")
 	public List<XxrCloudTemplateHeader> getCloudTemplate(@RequestBody CloudTemplatePo cloudTemplatePo) {
 		log.info("Entering getCloudTemplate Method in Controller ###");
 		 List<XxrCloudTemplateHeader> list =new ArrayList<>();
