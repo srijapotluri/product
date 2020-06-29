@@ -61,19 +61,20 @@ public class CloudStagingMetaDataController {
 	}
 	
 	@PostMapping("/getcloudtemplate")
-	public List<XxrCloudTemplateHeader> getCloudTemplate(@RequestBody CloudTemplatePo cloudTemplatePo) {
+	public ResponseEntity<List<XxrCloudTemplateHeader>> getCloudTemplate(@RequestBody CloudTemplatePo cloudTemplatePo) {
 		log.info("Entering getCloudTemplate Method in Controller ###");
 		 List<XxrCloudTemplateHeader> list =new ArrayList<>();
 		 try {
 		if(cloudTemplatePo.getObjectCode()!=null)
 			list=xxrCloudService.getCloudTemplate(cloudTemplatePo);
 		else
-			log.error("Please send ObjectCode in the Input Data");	
+			return new ResponseEntity("Please send ObjectCode in Request Object",HttpStatus.BAD_REQUEST);
 		 }
 		 catch(Exception e) {
 			 log.error(e.getMessage());
 		 }
-		return list;
+		 return new ResponseEntity<List<XxrCloudTemplateHeader>>(list, new HttpHeaders(), HttpStatus.OK);
+		
 		
 	}
 	
