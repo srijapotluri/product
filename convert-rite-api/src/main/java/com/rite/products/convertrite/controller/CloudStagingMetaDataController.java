@@ -1,5 +1,8 @@
 package com.rite.products.convertrite.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +10,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rite.products.convertrite.model.XxrCloudTemplateHeader;
 import com.rite.products.convertrite.po.CloudSourceColumnsPo;
+import com.rite.products.convertrite.po.CloudTemplatePo;
 import com.rite.products.convertrite.po.XxrCloudTemplatePo;
 import com.rite.products.convertrite.service.XxrCloudService;
 
@@ -52,5 +59,23 @@ public class CloudStagingMetaDataController {
 		return new ResponseEntity<CloudSourceColumnsPo>(cloudSourceColumnsPo, new HttpHeaders(), HttpStatus.OK);
 
 	}
+	
+	@PostMapping("getcloudtemplate")
+	public List<XxrCloudTemplateHeader> getCloudTemplate(@RequestBody CloudTemplatePo cloudTemplatePo) {
+		log.info("Entering getCloudTemplate Method in Controller ###");
+		 List<XxrCloudTemplateHeader> list =new ArrayList<>();
+		 try {
+		if(cloudTemplatePo.getObjectCode()!=null)
+			list=xxrCloudService.getCloudTemplate(cloudTemplatePo);
+		else
+			log.error("Please send ObjectCode in the Input Data");	
+		 }
+		 catch(Exception e) {
+			 log.error(e.getMessage());
+		 }
+		return list;
+		
+	}
+	
 
 }

@@ -1,0 +1,118 @@
+package com.rite.products.convertrite.po;
+
+public class CloudTemplatePo {
+
+	private String templateName;
+	private String templateType;
+	private String objectCode;
+	private String parentObjectCode;
+	private String cloudDataTableName;
+	private String sourceHeaderTemplate;
+	private Integer bu;
+	private String buSpecific;
+	private String projectName;
+	private Integer podId;
+	private String tableName;
+	public Integer getBu() {
+		return bu;
+	}
+
+	public void setBu(Integer bu) {
+		this.bu = bu;
+	}
+
+	public Integer getPodId() {
+		return podId;
+	}
+
+	public void setPodId(Integer podId) {
+		this.podId = podId;
+	}
+
+	private String viewName;
+
+	public String getTemplateName() {
+		return templateName;
+	}
+
+	public void setTemplateName(String templateName) {
+		this.templateName = templateName;
+	}
+
+	public String getTemplateType() {
+		return templateType;
+	}
+
+	public void setTemplateType(String templateType) {
+		this.templateType = templateType;
+	}
+
+	public String getObjectCode() {
+		return objectCode;
+	}
+
+	public void setObjectCode(String objectCode) {
+		this.objectCode = objectCode;
+	}
+
+	public String getParentObjectCode() {
+		return parentObjectCode;
+	}
+
+	public void setParentObjectCode(String parentObjectCode) {
+		this.parentObjectCode = parentObjectCode;
+	}
+
+	public String getCloudDataTableName() {
+		return cloudDataTableName;
+	}
+
+	public void setCloudDataTableName(String cloudDataTableName) {
+		this.cloudDataTableName = cloudDataTableName;
+	}
+
+	public String getSourceHeaderTemplate() {
+		return sourceHeaderTemplate;
+	}
+
+	public void setSourceHeaderTemplate(String sourceHeaderTemplate) {
+		this.sourceHeaderTemplate = sourceHeaderTemplate;
+	}
+
+
+
+	public String getBuSpecific() {
+		return buSpecific;
+	}
+
+	public void setBuSpecific(String buSpecific) {
+		this.buSpecific = buSpecific;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
+	public String getViewName() {
+		return viewName;
+	}
+
+	public void setViewName(String viewName) {
+		this.viewName = viewName;
+	}
+
+}

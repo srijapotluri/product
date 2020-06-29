@@ -8,11 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rite.products.convertrite.model.CloudMetaData;
 import com.rite.products.convertrite.model.XxrCloudTable;
+import com.rite.products.convertrite.model.XxrCloudTemplateHeader;
 import com.rite.products.convertrite.po.CloudSourceColumnsPo;
+import com.rite.products.convertrite.po.CloudTemplatePo;
 import com.rite.products.convertrite.po.XxrCloudTemplatePo;
 import com.rite.products.convertrite.respository.CloudMetaDataRepository;
+import com.rite.products.convertrite.respository.CloudTemplateHeaderDaoImpl;
 import com.rite.products.convertrite.respository.SourceTemplateColumnsRepository;
 import com.rite.products.convertrite.respository.SourceTemplateHeadersRepository;
 import com.rite.products.convertrite.respository.XxrCloudColumnsRepository;
@@ -33,6 +35,8 @@ public class XxrColudServiceImpl implements XxrCloudService {
 	SourceTemplateColumnsRepository sourceTemplateColumnsRepository;
 	@Autowired
 	CloudMetaDataRepository cloudMetaDataRepository;
+	@Autowired
+	CloudTemplateHeaderDaoImpl cloudTemplateHeaderDaoImpl;
 
 	public XxrCloudTemplatePo getAllCloudData() {
 		log.info("Start of getAllCloudData in Service Layer ###");
@@ -46,7 +50,7 @@ public class XxrColudServiceImpl implements XxrCloudService {
 			String[] pod = cloudMetaDataRepository.getValues("POD");
 			String[] bu = cloudMetaDataRepository.getValues("BU");
 			templateHeaders = sourceTemplateHeadersRepository.getTemplateHeaders(objectNames);
-			
+
 			cloudTemplatePo.setCloudTableMetaData(cloudDataList);
 			cloudTemplatePo.setBu(bu);
 			cloudTemplatePo.setPod(pod);
@@ -79,4 +83,16 @@ public class XxrColudServiceImpl implements XxrCloudService {
 		}
 		return cloudSourceColumnsPo;
 	}
+
+	public List<XxrCloudTemplateHeader> getCloudTemplate(CloudTemplatePo cloudTemplatePo) {
+		List<XxrCloudTemplateHeader> list = new ArrayList<>();
+		try {
+			list = cloudTemplateHeaderDaoImpl.getCloudTemplate(cloudTemplatePo);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+
+		return list;
+	}
+
 }
