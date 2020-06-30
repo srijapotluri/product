@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rite.products.convertrite.model.XxrCloudTable;
+import com.rite.products.convertrite.model.XxrCloudTemplateColumns;
 import com.rite.products.convertrite.model.XxrCloudTemplateHeader;
 import com.rite.products.convertrite.po.CloudSourceColumnsPo;
 import com.rite.products.convertrite.po.CloudTemplatePo;
@@ -19,6 +20,7 @@ import com.rite.products.convertrite.respository.SourceTemplateColumnsRepository
 import com.rite.products.convertrite.respository.SourceTemplateHeadersRepository;
 import com.rite.products.convertrite.respository.XxrCloudColumnsRepository;
 import com.rite.products.convertrite.respository.XxrCloudTableRepository;
+import com.rite.products.convertrite.respository.XxrCloudTemplateColumnsRepository;
 
 @Service
 public class XxrColudServiceImpl implements XxrCloudService {
@@ -37,8 +39,10 @@ public class XxrColudServiceImpl implements XxrCloudService {
 	CloudMetaDataRepository cloudMetaDataRepository;
 	@Autowired
 	CloudTemplateHeaderDaoImpl cloudTemplateHeaderDaoImpl;
+	@Autowired
+	XxrCloudTemplateColumnsRepository xxrCloudTemplateColumnsRepository;
 
-	public XxrCloudTemplatePo getAllCloudData() {
+	public XxrCloudTemplatePo getAllCloudData() throws Exception{
 		log.info("Start of getAllCloudData in Service Layer ###");
 		List<XxrCloudTable> cloudDataList = new ArrayList<>();
 		String[] templateHeaders;
@@ -59,13 +63,13 @@ public class XxrColudServiceImpl implements XxrCloudService {
 			cloudTemplatePo.setTemplateHeaders(templateHeaders);
 
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			throw new Exception(e.getMessage());
 		}
 		return cloudTemplatePo;
 	}
 
-	public CloudSourceColumnsPo getCloudSourceColumns(String sourceTemplateName, String cloudTableName) {
-		log.info("Entering getCloudSourceColumns Method in Service Layer ####");
+	public CloudSourceColumnsPo getCloudSourceColumns(String sourceTemplateName, String cloudTableName) throws Exception{
+		log.info("Start Of getCloudSourceColumns Method in Service Layer ####");
 		CloudSourceColumnsPo cloudSourceColumnsPo = new CloudSourceColumnsPo();
 
 		try {
@@ -79,20 +83,31 @@ public class XxrColudServiceImpl implements XxrCloudService {
 			cloudSourceColumnsPo.setSourceColumns(sourceColumns);
 
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			throw new Exception(e.getMessage());
 		}
 		return cloudSourceColumnsPo;
 	}
 
-	public List<XxrCloudTemplateHeader> getCloudTemplate(CloudTemplatePo cloudTemplatePo) {
+	public List<XxrCloudTemplateHeader> getCloudTemplate(CloudTemplatePo cloudTemplatePo) throws Exception{
+		log.info("Start Of getCloudTemplate Method in Service Layer ####");
 		List<XxrCloudTemplateHeader> list = new ArrayList<>();
 		try {
 			list = cloudTemplateHeaderDaoImpl.getCloudTemplate(cloudTemplatePo);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			throw new Exception(e.getMessage());
 		}
-
 		return list;
+	}
+
+	public List<XxrCloudTemplateColumns> getCloudTemplateColumns(long templateId) throws Exception {
+		log.info("Start Of getCloudTemplateColumns Method in Service Layer ####");
+		List<XxrCloudTemplateColumns> cloudTemplateColumnsList = new ArrayList<>();
+		try {
+			cloudTemplateColumnsList = xxrCloudTemplateColumnsRepository.getCloudTemplateColumns(templateId);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		return cloudTemplateColumnsList;
 	}
 
 }

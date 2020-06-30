@@ -21,7 +21,7 @@ public class CloudTemplateHeaderDaoImpl {
 	@Autowired
 	EntityManagerFactory em;
 	private static final Logger log = LoggerFactory.getLogger(CloudTemplateHeaderDaoImpl.class);
-
+	@SuppressWarnings("unchecked")
 	public List<XxrCloudTemplateHeader> getCloudTemplate(CloudTemplatePo cloudTemplatePo) {
 
 		List<XxrCloudTemplateHeader> list = new ArrayList<>();
