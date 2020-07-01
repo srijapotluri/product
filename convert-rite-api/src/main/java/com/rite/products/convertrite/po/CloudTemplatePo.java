@@ -1,7 +1,8 @@
 package com.rite.products.convertrite.po;
 
 public class CloudTemplatePo {
-
+	private Long templateId;
+	private Long tableId;
 	private String templateName;
 	private String templateType;
 	private String objectCode;
@@ -13,6 +14,23 @@ public class CloudTemplatePo {
 	private String projectName;
 	private Integer podId;
 	private String tableName;
+	
+	public Long getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Long templateId) {
+		this.templateId = templateId;
+	}
+
+	public Long getTableId() {
+		return tableId;
+	}
+
+	public void setTableId(Long tableId) {
+		this.tableId = tableId;
+	}
+
 	public Integer getBu() {
 		return bu;
 	}

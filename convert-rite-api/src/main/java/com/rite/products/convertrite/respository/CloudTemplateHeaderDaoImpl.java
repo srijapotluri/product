@@ -30,6 +30,8 @@ public class CloudTemplateHeaderDaoImpl {
 
 			if (!isNullOrEmpty(cloudTemplatePo.getObjectCode()))
 				sqlBuilder.append(" where x.objectCode = :objectCode");
+			if(cloudTemplatePo.getTemplateId()!=null)
+				sqlBuilder.append(" and x.templateId = :templateId");
 			if (cloudTemplatePo.getPodId() != null)
 				sqlBuilder.append(" and x.podId = :podId");
 			if (cloudTemplatePo.getBu()!=null)
@@ -59,6 +61,8 @@ public class CloudTemplateHeaderDaoImpl {
 			
 			if (!isNullOrEmpty(cloudTemplatePo.getObjectCode()))
 				query.setParameter("objectCode", cloudTemplatePo.getObjectCode());
+			if(cloudTemplatePo.getTemplateId()!=null)
+				query.setParameter("templateId", cloudTemplatePo.getTemplateId());
 			if (cloudTemplatePo.getPodId() != null)
 				query.setParameter("podId", cloudTemplatePo.getPodId());
 			if (cloudTemplatePo.getBu() != null)
