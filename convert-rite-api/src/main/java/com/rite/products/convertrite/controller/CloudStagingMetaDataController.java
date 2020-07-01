@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rite.products.convertrite.model.XxrCloudTemplateColumns;
 import com.rite.products.convertrite.model.XxrCloudTemplateHeader;
+import com.rite.products.convertrite.po.LovPo;
 import com.rite.products.convertrite.po.CloudSourceColumnsPo;
 import com.rite.products.convertrite.po.CloudTemplatePo;
 import com.rite.products.convertrite.po.XxrCloudTemplatePo;
@@ -139,4 +140,36 @@ public class CloudStagingMetaDataController {
 		return new ResponseEntity<List<XxrCloudTemplateColumns>>(cloudTemplateColumnsList, HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "This Api returns source and cloud cloumns,we has to provide sourceTemplateId and CloudTableId names as query params")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successful Response"),
+							@ApiResponse(code = 500, message = "Server Side Error"),
+							@ApiResponse(code = 400, message = "Bad Request")
+		})
+	@SuppressWarnings("unchecked")
+	@GetMapping("/getcloudsourcecolumnsbyids")
+	public ResponseEntity<CloudSourceColumnsPo> getCloudSourceColumnsById(
+			@RequestParam("templateId") Long templateId,
+			@RequestParam("tableId") Long tableId) {
+
+		log.info("Start of getCloudSourceColumnsById Method in Controller ###");
+		log.info("sourceTemplateId:::::::" + templateId + "CloudTableId:::::::" + tableId);
+		CloudSourceColumnsPo cloudSourceColumnsPo = new CloudSourceColumnsPo();
+		try {
+			if (templateId != null  || tableId != null)
+				cloudSourceColumnsPo = xxrCloudService.getCloudSourceColumnsByIds(templateId, tableId);
+			else
+				 return new ResponseEntity("Missing sourceTemplateId or CloudTableId in the Request",HttpStatus.BAD_REQUEST);
+				//log.error("Please send SourceTemplateName and CloudTableName in the URL");
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return new ResponseEntity(
+					"Please contact System Administrator there is an error while processing the request",
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<CloudSourceColumnsPo>(cloudSourceColumnsPo, new HttpHeaders(), HttpStatus.OK);
+
+	}
+
+	
+	
 }
