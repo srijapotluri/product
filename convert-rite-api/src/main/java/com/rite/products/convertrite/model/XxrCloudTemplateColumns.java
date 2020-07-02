@@ -10,9 +10,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="XXR_CLOUD_TEMPLATE_COLUMNS")
 public class XxrCloudTemplateColumns {
-	@Id
+	
 	@Column(name="TEMPLATE_ID")
 	private long templateId;
+	@Id
+	@Column(name="COLUMN_ID")
+	private long columnId;
 	@Column(name="COLUMN_NAME")
 	private String columnName;
 	@Column(name="SOURCE_COLUMN_NAME")
@@ -27,6 +30,13 @@ public class XxrCloudTemplateColumns {
 	private Integer seq;
 	@Column(name="START_DATE")
 	private Date startDate;
+	
+	public long getColumnId() {
+		return columnId;
+	}
+	public void setColumnId(long columnId) {
+		this.columnId = columnId;
+	}
 	public Integer getMappingValue() {
 		return mappingValue;
 	}

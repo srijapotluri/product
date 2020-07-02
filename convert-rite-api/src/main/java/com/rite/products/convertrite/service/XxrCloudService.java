@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.rite.products.convertrite.model.XxrCloudTemplateColumns;
 import com.rite.products.convertrite.model.XxrCloudTemplateHeader;
+import com.rite.products.convertrite.po.LovPo;
 import com.rite.products.convertrite.po.CloudSourceColumnsPo;
 import com.rite.products.convertrite.po.CloudTemplatePo;
 import com.rite.products.convertrite.po.XxrCloudTemplatePo;
@@ -20,5 +21,9 @@ public interface XxrCloudService {
 	List<XxrCloudTemplateHeader> getCloudTemplate(CloudTemplatePo cloudTemplatePo) throws Exception;
 
 	List<XxrCloudTemplateColumns> getCloudTemplateColumns(long templateId) throws Exception;
+	
+	LovPo getCloudLovValues(String [] lovValues) throws Exception;
+	
+	CloudSourceColumnsPo getCloudSourceColumnsByIds(long templateId, long tableId) throws Exception;
 
 }

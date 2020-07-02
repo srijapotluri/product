@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.rite.products.convertrite.model.XxrCloudTable;
 import com.rite.products.convertrite.model.XxrCloudTemplateColumns;
 import com.rite.products.convertrite.model.XxrCloudTemplateHeader;
+import com.rite.products.convertrite.po.LovPo;
 import com.rite.products.convertrite.po.CloudSourceColumnsPo;
 import com.rite.products.convertrite.po.CloudTemplatePo;
 import com.rite.products.convertrite.po.XxrCloudTemplatePo;
@@ -42,7 +43,7 @@ public class XxrColudServiceImpl implements XxrCloudService {
 	@Autowired
 	XxrCloudTemplateColumnsRepository xxrCloudTemplateColumnsRepository;
 
-	public XxrCloudTemplatePo getAllCloudData() throws Exception{
+	public XxrCloudTemplatePo getAllCloudData() throws Exception {
 		log.info("Start of getAllCloudData in Service Layer ###");
 		List<XxrCloudTable> cloudDataList = new ArrayList<>();
 		String[] templateHeaders;
@@ -68,14 +69,15 @@ public class XxrColudServiceImpl implements XxrCloudService {
 		return cloudTemplatePo;
 	}
 
-	public CloudSourceColumnsPo getCloudSourceColumns(String sourceTemplateName, String cloudTableName) throws Exception{
+	public CloudSourceColumnsPo getCloudSourceColumns(String sourceTemplateName, String cloudTableName)
+			throws Exception {
 		log.info("Start Of getCloudSourceColumns Method in Service Layer ####");
 		CloudSourceColumnsPo cloudSourceColumnsPo = new CloudSourceColumnsPo();
 
 		try {
 			long tableId = xxrCloudTableRepository.getTableId(cloudTableName);
 			long templateId = sourceTemplateHeadersRepository.getTemplateId(sourceTemplateName);
-			log.info("tableId:::::: " + tableId + "templateId:::: " + templateId);
+			log.info("tableId:::::: " + tableId + " templateId:::: " + templateId);
 
 			String[] cloudColumns = xxrCloudColumnsRepository.getColumnName(tableId);
 			String[] sourceColumns = sourceTemplateColumnsRepository.getColumnNames(templateId);
@@ -88,7 +90,7 @@ public class XxrColudServiceImpl implements XxrCloudService {
 		return cloudSourceColumnsPo;
 	}
 
-	public List<XxrCloudTemplateHeader> getCloudTemplate(CloudTemplatePo cloudTemplatePo) throws Exception{
+	public List<XxrCloudTemplateHeader> getCloudTemplate(CloudTemplatePo cloudTemplatePo) throws Exception {
 		log.info("Start Of getCloudTemplate Method in Service Layer ####");
 		List<XxrCloudTemplateHeader> list = new ArrayList<>();
 		try {
@@ -108,6 +110,50 @@ public class XxrColudServiceImpl implements XxrCloudService {
 			throw new Exception(e.getMessage());
 		}
 		return cloudTemplateColumnsList;
+	}
+
+	public LovPo getCloudLovValues(String[] lovValues) throws Exception {
+		log.info("Start Of getCloudLovValues Method in Service Layer ####");
+		LovPo lovPo = new LovPo();
+		try {
+			for (int i = 0; i < lovValues.length; i++) {
+
+				if (lovValues[i].equalsIgnoreCase("BU")) {
+					String[] bu = cloudMetaDataRepository.getValues("BU");
+					lovPo.setBu(bu);
+				} else if (lovValues[i].equalsIgnoreCase("PODID")) {
+					String[] pod = cloudMetaDataRepository.getValues("POD");
+					lovPo.setPod(pod);
+				} else if (lovValues[i].equalsIgnoreCase("OBJECTCODE")) {
+					String[] objectCode = cloudMetaDataRepository.getValues("OBJECT_NAME");
+					lovPo.setObjectCodes(objectCode);
+				} else if (lovValues[i].equalsIgnoreCase("PARENTOBJECTCODE")) {
+					String[] parentObjectCode = cloudMetaDataRepository.getValues("OBJECT_NAME");
+					lovPo.setParentObjectCode(parentObjectCode);
+				}
+
+			}
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		return lovPo;
+	}
+	
+	public CloudSourceColumnsPo getCloudSourceColumnsByIds(long templateId, long tableId) throws Exception{
+		log.info("Start Of getCloudSourceColumnsByIds Method in Service Layer ####");
+		CloudSourceColumnsPo cloudSourceColumnsPo = new CloudSourceColumnsPo();
+
+		try {
+			log.info("tableId:::::: " + tableId + " templateId:::: " + templateId);
+			String[] cloudColumns = xxrCloudColumnsRepository.getColumnName(tableId);
+			String[] sourceColumns = sourceTemplateColumnsRepository.getColumnNames(templateId);
+			cloudSourceColumnsPo.setCloudColumns(cloudColumns);
+			cloudSourceColumnsPo.setSourceColumns(sourceColumns);
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		return cloudSourceColumnsPo;	
 	}
 
 }
