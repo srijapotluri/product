@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rite.products.convertrite.po.LovPo;
-import com.rite.products.convertrite.po.XxrCloudTemplatePo;
 import com.rite.products.convertrite.service.XxrCloudService;
-import com.rite.products.convertrite.service.XxrColudServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -31,6 +29,7 @@ public class LovController {
 		  @ApiResponse(code = 500, message = "Server Side Error")
 	})
 	@GetMapping("/getlovvalues")
+	@SuppressWarnings("unchecked")
 	public ResponseEntity<LovPo> getLovValues(@RequestParam("lovValues") String [] lovValues) {
 		LovPo cloudLovPo=new LovPo();
 		try {

@@ -1,5 +1,7 @@
 package com.rite.products.convertrite.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +9,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="XXR_CLOUD_COLUMNS")
-public class XxrCloudColumns {
+public class XxrCloudColumns implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private long tableId;

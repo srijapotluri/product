@@ -1,5 +1,6 @@
 package com.rite.products.convertrite.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -9,7 +10,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="XXR_CLOUD_TEMPLATE_COLUMNS")
-public class XxrCloudTemplateColumns {
+public class XxrCloudTemplateColumns implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Column(name="TEMPLATE_ID")
 	private long templateId;

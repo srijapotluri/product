@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rite.products.convertrite.model.XxrCloudTemplateColumns;
 import com.rite.products.convertrite.model.XxrCloudTemplateHeader;
-import com.rite.products.convertrite.po.LovPo;
 import com.rite.products.convertrite.po.CloudSourceColumnsPo;
 import com.rite.products.convertrite.po.CloudTemplatePo;
 import com.rite.products.convertrite.po.XxrCloudTemplatePo;
